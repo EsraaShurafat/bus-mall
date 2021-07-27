@@ -14,6 +14,7 @@ let votesArry = [];
 let shownArry = [];
 
 
+let products = [];
 
 
 function Product(name, src) {
@@ -28,9 +29,9 @@ function Product(name, src) {
 }
 
 // chart
-Product.products = [];
+// Product.products=[];
 
-let products = [];
+
 // instances
 new Product('bag', 'imges/bag.jpg');
 new Product('banana', 'imges/banana.jpg');
@@ -51,7 +52,7 @@ new Product('tauntaun', 'imges/tauntaun.jpg');
 new Product('unicorn', 'imges/unicorn.jpg');
 new Product('water-can', 'imges/water-can.jpg');
 new Product('wine-glass ', 'imges/wine-glass copy.jpg');
-new Product('wireframe', 'imges/wireframe.png');
+
 // console.log(products);
 // console.log(Product);
 
@@ -82,10 +83,10 @@ function renderThreeImges() {
   while (leftImg === middleImg || leftImg === rightImg || rightImg === middleImg 
     || Imges.includes(leftImg) || Imges.includes(rightImg) || Imges.includes(middleImg)) {
 
-    console.log('inside');
+    leftImg=getRandomIndex();
     rightImg = getRandomIndex();
     middleImg = getRandomIndex();
-    leftImg=getRandomIndex();
+    
     
 
   }
@@ -95,14 +96,14 @@ function renderThreeImges() {
 
 
   leftElement.src = products[leftImg].imgSource;
-   products[leftImg].shown++;
-  middleElement.src = products[middleImg].imgSource;
+  products[leftImg].shown++;
+  middleElement.src =products[middleImg].imgSource;
    products[leftImg].shown++;
   rightElement.src = products[rightImg].imgSource;
   products[leftImg].shown++;
 
 
-
+  updateStorge();
 
 
 
@@ -110,7 +111,7 @@ function renderThreeImges() {
 renderThreeImges();
 
 
-console.log(leftImg, rightImg, middleImg);
+// console.log(leftImg, rightImg, middleImg);
 
 
 
@@ -131,21 +132,21 @@ function userClick(event) {
   if (userAttemptCounter <= maxAttempts) {
     if (event.target.id === 'leftImge') {
       products[leftImg].vote++;
-      console.log(products);
+      // console.log(products);
       // renderThreeImges();
 
     } else if (event.target.id === 'middleImge') {
       products[middleImg].vote++;
-      console.log(products);
+      // console.log(products);
       // renderThreeImges();
     } else if (event.target.id === 'rightImge') {
       products[rightImg].vote++;
-      console.log(products);
+      // console.log(products);
       // renderThreeImges()
     }
     renderThreeImges();
 
-  
+    
   
   
 }else {
@@ -268,6 +269,27 @@ function showChart() {
   );
 }
 
+// local storage 
+
+function updateStorge() {
+console.log('updatearr',products);
+let strigArr=JSON.stringify(products);
+localStorage.setItem('Products',strigArr);
+}
+
+function getStorageData(){
+  let data=localStorage.getItem('Products');
+  console.log(data);
+  let parseArr=JSON.parse(data);
+  console.log(parseArr);
+  if (parseArr!==null) {
+    products=parseArr;
+  }
+  
+  renderThreeImges();
+}
+
+getStorageData();
 
 
 
