@@ -103,7 +103,7 @@ function renderThreeImges() {
   products[leftImg].shown++;
 
 
-  updateStorge();
+  
 
 
 
@@ -150,6 +150,7 @@ function userClick(event) {
   
   
 }else {
+  updateStorge();
     buttonelement.hidden = false;
     // buttonelement.addEventListener('click', userClick);
     buttonelement.addEventListener('click', list);
@@ -164,6 +165,7 @@ function userClick(event) {
     console.log(votesArry);
     divImges.removeEventListener('click', userClick);
     showChart();
+    
   }
   userAttemptCounter++;
 }
